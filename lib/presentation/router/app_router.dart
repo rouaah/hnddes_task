@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hnndes_task/presentation/router/routes.dart';
+import 'package:hnndes_task/presentation/screens/auth_screens/login_screen.dart';
 
 class AppRoutes {
+
   static Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     // FlutterNativeSplash.remove();
-    switch (routeSettings.name) {
+    switch (routeSettings.name){
       case Routes.initialRoute:
-        return MaterialPageRoute(builder: (context) => FutureBuilder(
-            builder: (context,data)=> const SplashView(), future: Future.wait([
-
-        ]),));
-
-      case Routes.onBoardingViewRoute:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => OnBoardingCubit(),
-            child: const OnBoardingScreen(),
-          ),
+        return MaterialPageRoute(builder: (context) =>
+            LoginScreen()
         );
+
+        case Routes.onBoardingViewRoute:
+        return MaterialPageRoute(builder: (context) =>
+            LoginScreen()
+        );
+
+        case Routes.loginViewRoute:
+        return MaterialPageRoute(builder: (context) =>
+            LoginScreen()
+        );
+
+        case Routes.leavesViewRoute:
+        return MaterialPageRoute(builder: (context) =>
+            LoginScreen()
+        );
+
+      // case Routes.onBoardingViewRoute:
+      //   return MaterialPageRoute(
+      //     builder: (context) => const OnBoardingScreen(),
+      //   );
 
       default:
         return unFoundRoute();

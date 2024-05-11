@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:osta/core/constants/app_colors.dart';
-import 'package:osta/logic/themes/app_theme.dart';
+import 'package:hnndes_task/core/constants/app_colors.dart';
+import 'package:hnndes_task/core/utils/app_text_styles.dart';
+
 
 class AppButton extends StatelessWidget {
   AppButton(
@@ -22,8 +23,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: btnWidth ?? 364.w,
-      height: btnHeight ?? 50.h,
+      width: btnWidth ?? 366.w,
+      height: btnHeight ?? 56.h,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
@@ -35,8 +36,9 @@ class AppButton extends StatelessWidget {
           ) ,
           onPressed: onTap,
           child: Text(buttonText,
-              style: TextStyle(color:Colors.white,fontSize: 18.sp,fontWeight: FontWeight.w700)),
-
+              style:AppTextStyles.btnTextStyle,
+              // TextStyle(color:Colors.white,fontSize: 18.sp,fontWeight: FontWeight.w700)),
+        ),
         ),
       ),
     );

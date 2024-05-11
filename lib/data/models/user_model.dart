@@ -1,54 +1,44 @@
+
 import 'package:equatable/equatable.dart';
+import 'package:hnndes_task/data/models/company_model.dart';
+import 'package:hnndes_task/data/models/department_model.dart';
+import 'package:hnndes_task/data/models/employee_model.dart';
 
+class UserModel extends Equatable{
+  final String id;
+  final String username;
 
-class UserModel extends Equatable {
+  final List<Company> companys;
+  final List<Department> departments;
+  final Employee employee;
+
   const UserModel(
-      {required this.userId,
-      required this.phone,
-      this.name,
-      this.email,
-        this.gps,
-        this.addressId,
-      this.addressDescription,
-     this.image,
-        required this.status
-      });
+      {required this.id,
+        required this.username,
+        required this.companys,
+        required this.departments,
+        required this.employee});
 
-  final int userId;
-  final String? name;
-  final String phone;
-  final String? email;
-  final List? gps;
-  final String? addressId;
-  final String? addressDescription;
-  final String? image;
-  final String? status;
-
-  @override
-  List<Object?> get props => [this.userId];
-
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-  userId: json["id"] ,
-    phone: json['phone'],
-    name: json['name'],
-    email: json['email'],
-    gps: json['gps'] ?? [],
-    addressId: json['address_id'],
-    addressDescription: json['address_desc'],
-    image: json['image'],
-    status: json['status']
+  factory UserModel.fromJson(Map<String, dynamic> json) =>UserModel(
+    id: json['id'] ,
+      username: json['username'],
+    companys: List<Company>.from(json['companys'].map((x)=> Company.fromJson(x))) ?? [],
+    departments: List<Department>.from(json['departments'].map((x)=> Department.fromJson(x)))??[],
+    employee: Employee.fromJson(json['employee']),
   );
 
-  Map<String, dynamic> toJson() => {
-    "id": userId,
-    "phone": phone,
-    "name": name,
-    "email":email,
-    "gps":gps,
-    "address_id":addressId,
-    "address_desc": addressDescription,
-    "image":image,
-    "status":status
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['fullName'] = this.username;
+    data['companys'] = List<Company>.from(this.companys!.map((x) => x.toJson()));
+    data['departments'] = List<Department>.from(this.departments!.map((x) => x.toJson()));
+    data['employee']=this.employee;
+    return data;
+  }
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [this.id];
 
 }

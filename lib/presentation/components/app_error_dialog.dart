@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:osta/core/extensions/app_sizes.dart';
 
-import '../../core/constants/app_colors.dart';
-import '../../logic/themes/themes_cubit.dart';
 
 class ErrorDialog extends StatelessWidget {
   const ErrorDialog({super.key, required this.errorText});
@@ -14,7 +10,7 @@ class ErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child:  Container(
-              height: context.height * 0.4,
+              // height: context.height * 0.4,
               // width: context.width * 0.8,
               decoration: BoxDecoration(
                   // color: state.brightness == Brightness.light
@@ -28,7 +24,7 @@ class ErrorDialog extends StatelessWidget {
                       content: Text(errorText),
                       actions: <Widget>[
                         TextButton(
-                          child: Text("OK"),
+                          child: Text("Okay"),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },

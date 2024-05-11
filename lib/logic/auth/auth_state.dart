@@ -1,7 +1,5 @@
 
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import '../../data/models/user_model.dart';
 
 abstract class AuthState extends Equatable{
@@ -46,43 +44,3 @@ class GetDeviceInfoErrorState extends AuthState {
   final String errorMsg;
   const GetDeviceInfoErrorState({required this.errorMsg});
 }
-//
-// class GetUserInfoLoadingState extends AuthState{}
-// class GetUserInfoSuccessState extends AuthState {
-//   final UserModel user;
-//   const GetUserInfoSuccessState({required this.user});
-// }
-// class GetUserInfoErrorState extends AuthState {
-//   final String errorMsg;
-//   const GetUserInfoErrorState({required this.errorMsg});
-// }
-//
-// class EditUserInfoLoadingState extends AuthState{}
-// class EditUserInfoSuccessState extends AuthState {
-//   final UserModel user;
-//   const EditUserInfoSuccessState({required this.user});
-// }
-// class EditUserInfoErrorState extends AuthState {
-//   final String errorMsg;
-//   const EditUserInfoErrorState({required this.errorMsg});
-// }
-//
-// class ChangeProfileImageLoadingState extends AuthState{}
-// class ChangeProfileImageSuccessState extends AuthState {
-//   final UserModel user;
-//   const ChangeProfileImageSuccessState({required this.user});
-// }
-// class ChangeProfileImageErrorState extends AuthState {
-//   final String errorMsg;
-//   const ChangeProfileImageErrorState({required this.errorMsg});
-// }
-//
-// class DeleteProfileImageLoadingState extends AuthState{}
-// class DeleteProfileImageSuccessState extends AuthState {
-//   final UserModel user;
-//   const DeleteProfileImageSuccessState({required this.user});
-// }
-// class DeleteProfileImageErrorState extends AuthState {
-//   final String errorMsg;
-//   const DeleteProfileImageErrorState({required this.errorMsg});
-// }

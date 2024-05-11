@@ -6,18 +6,18 @@ class AppTextStyles {
 
   static TextStyle labelTextStyle =  TextStyle(
     fontSize : 20.sp,
-    fontWeight:  FontWeight.w500,
-        color :AppColors.textColor,
+    fontWeight:  FontWeight.bold,
+        color :AppColors.darkTextColor,
   );
   static TextStyle label1TextStyle =  TextStyle(
-    fontSize : 20.sp,
+    fontSize : 18.sp,
     fontWeight:  FontWeight.w700,
         color :AppColors.textColor,
   );
-  static TextStyle titleTextStyle =  TextStyle(
-    fontSize : 16.sp,
+  static TextStyle btnTextStyle =  TextStyle(
+    fontSize : 20.sp,
     fontWeight:  FontWeight.w700,
-        color :AppColors.textColor,
+        color :AppColors.whiteTextColor,
   );
   static TextStyle title1TextStyle =  TextStyle(
     fontSize : 24.sp,
@@ -60,11 +60,6 @@ class AppTextStyles {
     fontWeight:  FontWeight.w400,
         color :AppColors.subtitleTextColor,
   );
-  static TextStyle buttonTextStyle =  TextStyle(
-    fontSize : 18.sp,
-    fontWeight:  FontWeight.w700,
-        color : Colors.white,
-  );
 
   static TextStyle onBoardingHeadingTextStyle = const TextStyle(
     fontSize: 25,
@@ -100,10 +95,6 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: AppColors.grey,
-  );
-  static TextStyle hintStyle = const TextStyle(
-    fontSize: 16,
-    color: AppColors.hintColor,
   );
 
   static TextStyle textStyle15 = const TextStyle(

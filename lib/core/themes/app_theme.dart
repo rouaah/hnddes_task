@@ -12,7 +12,7 @@ final appThemeData = {
   AppTheme.lightTheme : ThemeData(
     // useMaterial3: true,
     brightness: Brightness.light,
-    fontFamily: 'SpaceGrotesk',
+    fontFamily: 'Cairo',
     primaryColor: AppColors.primaryColor,
     primaryColorLight: AppColors.primaryColor,
     appBarTheme: AppBarTheme(
@@ -26,7 +26,7 @@ opacity: 1,
         ),
       ),
     iconTheme: IconThemeData(
-      color: AppColors.iconColor,
+      color: AppColors.textColor,
       size: 20,
     ),
     cardTheme: CardTheme(
@@ -54,43 +54,12 @@ opacity: 1,
             foregroundColor: MaterialStateProperty.all(AppColors.primaryColor ),
           // textStyle:MaterialStateProperty.all( AppTextStyles.buttonTextStyle)
         )),
-    textTheme: TextTheme(
-      // labelMedium: AppTextStyles.labelTextStyle,
-      // labelSmall: AppTextStyles.labelSmallTextStyle,
-      // bodyMedium: AppTextStyles.bodyMediumTextStyle,
-      // titleMedium:
-    ),
-    cardColor: Colors.white,
+      cardColor: Colors.white,
     backgroundColor: AppColors.lightBackgroundColor,
     scaffoldBackgroundColor: AppColors.lightBackgroundColor,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.primaryColor,
       
     )
-  ),
-  AppTheme.darkTheme : ThemeData(
-
-      useMaterial3: true,
-      brightness: Brightness.dark,
-      fontFamily: 'SpaceGrotesk',
-      primaryColor: AppColors.primaryColor,
-      primaryColorLight: AppColors.primaryColor,
-      appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        // titleTextStyle: AppTextStyles.labelTextStyle,
-        centerTitle: false,
-        iconTheme: IconThemeData(color: AppColors.lightBackgroundColor ),
-      ),
-      backgroundColor: AppColors.darkBackgroundColor,
-      scaffoldBackgroundColor: AppColors.darkBackgroundColor,
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColors.primaryColor,
-      )
-      // colorScheme: ColorScheme(
-      //
-      //   primary: AppColors.primaryColor, brightness: Brightness.dark,background:Colors.transparent, onPrimary: AppColors.primaryColor, secondary: AppColors.secondaryColor,onSecondary: AppColors.secondaryColor, error: Colors.orange,onError: Colors.orange, surface: AppColors.grey,onSurface: AppColors.grey,onBackground: AppColors.darkBackgroundColor )
-      // backgroundColor: Colors.transparent
-
   ),
 };

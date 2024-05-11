@@ -2,10 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart' as intl;
-import 'package:osta/core/constants/app_colors.dart';
-import 'package:osta/core/extensions/app_sizes.dart';
-import 'package:osta/logic/themes/app_theme.dart';
+import 'package:hnndes_task/core/constants/app_colors.dart';
 
 class AppTextField extends StatefulWidget {
   AppTextField(
@@ -40,18 +37,13 @@ class AppTextField extends StatefulWidget {
 }
 
 class _AppTextFieldState extends State<AppTextField> {
-  String? text = '';
-
-  bool isRTL(String text) {
-    return intl.Bidi.detectRtlDirectionality(text);
-  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 1.0),
-        width: widget.width ?? 364.w,
-        height: widget.height ??40.h,
+        margin: EdgeInsets.only(top: 6.h),
+        width: widget.width ?? 366.w,
+        height: widget.height ?? 55.h,
         child: TextFormField(
           // obscureText:isPassword==true && BlocProvider.of<AuthCubit>(context).ispasswordVisablitiy,
           cursorColor: Theme.of(context).primaryColor,
@@ -61,35 +53,26 @@ class _AppTextFieldState extends State<AppTextField> {
           keyboardType: widget.inputType ?? TextInputType.text,
           inputFormatters: widget.inputFormatters ?? [],
           decoration: InputDecoration(
-              fillColor: Colors.transparent,
+              fillColor: Colors.white,
               filled: true,
               contentPadding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 12.w),
               label: Text(widget.labelText ?? ''),
               hintText: widget.hintText,
               // helperText: hintText,
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0.r),
-                borderSide: BorderSide(color: AppColors.grey, width: 1.0),
+                borderRadius: BorderRadius.circular(12.0.r),
+                borderSide: BorderSide(color: AppColors.whiteTextColor, width: 1.0),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color:Theme.of(context).primaryColor,
-                  width: 1.0,
+                  width: 2.0,
                 ),
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(12.r),
               ),
 
           ),
           textAlign: TextAlign.start,
-          textDirection:isRTL(text!)? TextDirection.rtl : TextDirection.ltr,
-      onChanged:
-              (value) {
-    setState(() {
-    text = value;
-    });
-    widget.onFieldSubmit != null ? widget.onFieldSubmit!(value) : null ;
-          },
-    //       onFieldSubmitted: widget.onFieldSubmit ?? (){},
           onSaved: widget.onSaved,
         ));
   }
