@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hnndes_task/core/appkeys/app_keys.dart';
 import 'package:hnndes_task/core/helpers/cache_helper.dart';
 import 'package:hnndes_task/core/themes/app_theme.dart';
 import 'package:hnndes_task/data/api/dio_helper.dart';
 import 'package:hnndes_task/logic/auth/auth_cubit.dart';
 import 'package:hnndes_task/logic/debug/app_bloc_observer.dart';
 import 'package:hnndes_task/presentation/router/app_router.dart';
+import 'package:hnndes_task/presentation/router/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await CacheHelper.initStorage();
-  DioHelper.init(token:await CacheHelper.getStringData(key:'userToken') ?? '');
+  DioHelper.init(token: await CacheHelper.getStringData(key:'userToken') ?? '');
   Bloc.observer = AppBlocObserver();
   // CacheHelper.getIntData(key: 'userId');
   runApp(
@@ -33,11 +35,12 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder:(context,_)=> MaterialApp(
-        // navigatorKey: AppKeys.navigatorKey,
+        navigatorKey: AppKeys.navigatorKey,
         title: 'hnndes task',
         theme: appThemeData[AppTheme.lightTheme],
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoutes.onGenerateRoute,
+        initialRoute: CacheHelper.getStringData(key: 'useerToken').toString() != '' ? Routes.leavesViewRoute : Routes.loginViewRoute,
 
       ),
     );

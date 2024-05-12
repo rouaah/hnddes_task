@@ -9,10 +9,10 @@ class UserInfoParam{
   final String email;
 }
 
-class authResponse extends Equatable{
+class AuthResponse extends Equatable{
 final String token;
 final UserModel userData;
-const authResponse({required this.userData , required this.token});
+const AuthResponse({required this.userData , required this.token});
 
   @override
   // TODO: implement props

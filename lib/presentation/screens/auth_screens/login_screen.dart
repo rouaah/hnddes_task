@@ -7,6 +7,9 @@ import 'package:hnndes_task/core/extensions/app_navigator.dart';
 import 'package:hnndes_task/logic/auth/auth_cubit.dart';
 import 'package:hnndes_task/logic/auth/auth_cubit.dart';
 import 'package:hnndes_task/logic/auth/auth_state.dart';
+import 'package:hnndes_task/logic/leaves/leave_count_cubit/leave_count_cubit.dart';
+import 'package:hnndes_task/logic/leaves/leave_list_bloc/leave_list_bloc.dart';
+import 'package:hnndes_task/logic/leaves/leave_list_bloc/leave_list_event.dart';
 import 'package:hnndes_task/presentation/components/app_button.dart';
 import 'package:hnndes_task/presentation/components/app_error_dialog.dart';
 import 'package:hnndes_task/presentation/components/app_loading_dialog.dart';
@@ -35,8 +38,11 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is AuthenticatedState) {
             context.getBack();
             context.navigateAndRemoveUntil(
-                newRoute: Routes.leavesViewRoute);
-            // context.read<ProfileCubit>().getUserInfo();
+                newRoute: Routes.leavesViewRoute,arguments: state.user );
+            // context.read<LeaveListBloc>().add(GetLeaveListEvent(firstPage: 1));
+            // Future.wait([
+            // context.read<LeaveCountCubit>().getLeaveCount(employeeId: '6'),
+            // ]);
           }
           if (state is AuthLoadingState) {
             showAdaptiveDialog<Widget>(

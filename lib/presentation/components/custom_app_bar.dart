@@ -11,16 +11,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Size preferredSize;
 
   CustomAppBar({required this.title,this.actions})
-      : preferredSize = Size.fromHeight(60.h);
+      : preferredSize = Size.fromHeight(50.h);
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10.w,),
+        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 5.h),
     child: AppBar(
       title:
-
       Text(title,style: AppTextStyles.labelTextStyle,),
-      // ),
+      centerTitle: true,
       actions: actions ?? [],
     )
       );

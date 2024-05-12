@@ -35,8 +35,12 @@ class AuthCubit extends Cubit<AuthState> {
         },
                 (r) {
                   CacheHelper.saveData(key: 'userToken', value: r.token);
-                  CacheHelper.saveData(key: 'userId', value: r.userData.id);
-                  CacheHelper.saveData(key: 'employeeId', value: r.userData.employee.employeeId);
+                  // CacheHelper.saveData(key: 'userId', value: r.userData.id);
+                  CacheHelper.saveData(key: 'employeeId', value: r.userData.employee.employeeId.toString());
+                  CacheHelper.saveData(key: 'companyId', value: r.userData.employee.company.companyId.toString());
+                  CacheHelper.saveData(key: 'departmentId', value: r.userData.employee.department.departmentId.toString());
+                  CacheHelper.saveData(key: 'userName', value: r.userData.employee.fullName.toString());
+
                   DioHelper.init(token: r.token);
                   emit(AuthenticatedState(user:r.userData));
                 } );

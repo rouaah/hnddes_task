@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class ErrorDialog extends StatelessWidget {
-  const ErrorDialog({super.key, required this.errorText});
+  const ErrorDialog({super.key, required this.errorText,this.btnText,this.btnFunc});
 
   final String errorText;
+  final String? btnText;
+  final Function()? btnFunc;
 
   @override
   Widget build(BuildContext context) {
@@ -12,25 +15,23 @@ class ErrorDialog extends StatelessWidget {
       child:  Container(
               // height: context.height * 0.4,
               // width: context.width * 0.8,
-              decoration: BoxDecoration(
-                  // color: state.brightness == Brightness.light
-                  //     ? Colors.white
-                  //     : AppColors.darkGreyColor,
-                  // borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
+
               child: Center(
                   child: AlertDialog(
                       title: Text('something went wrong'),
-                      content: Text(errorText),
+                      content:Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.w,vertical: 8.h),
+                        child: Text(errorText,softWrap: true,textAlign: TextAlign.start,),
+                      ) ,
                       actions: <Widget>[
                         TextButton(
-                          child: Text("Okay"),
-                          onPressed: () {
+                          child: Text(btnText ?? "Okay"),
+                          onPressed: btnFunc ?? () {
                             Navigator.of(context).pop();
                           },
                         ),
                       ],
-                      contentPadding: EdgeInsets.all(8))))
+                      contentPadding: EdgeInsets.all(8.w))))
     );
   }
 }

@@ -30,7 +30,7 @@ class Leave extends Equatable{
 
   factory Leave.fromJson(Map<String, dynamic> json) =>
       Leave(
-          employeeId: json['id'],
+          employeeId: json['employeeId'],
           typeId: json['typeId'],
           absenceFrom:DateFormat('MMM d, yyyy').format(DateTime.parse(json['absenceFrom']).toLocal()),
           absenceTo:DateFormat('MMM d, yyyy').format(DateTime.parse(json['absenceTo']).toLocal()),
