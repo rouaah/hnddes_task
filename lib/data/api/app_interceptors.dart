@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hnndes_task/core/appkeys/app_keys.dart';
 import 'package:hnndes_task/core/extensions/app_navigator.dart';
 import 'package:hnndes_task/core/helpers/cache_helper.dart';
-import 'package:hnndes_task/data/api/endpoints.dart';
-import 'package:hnndes_task/data/repositories/auth_repository.dart';
 import 'package:hnndes_task/presentation/components/app_error_dialog.dart';
 import 'package:hnndes_task/presentation/router/routes.dart';
 
@@ -39,7 +37,14 @@ class AppInterceptors extends InterceptorsWrapper {
               context: AppKeys.navigatorKey.currentContext!,
               barrierDismissible: false,
               builder: (context) => ErrorDialog(errorText:'Session Expired', btnText: 'Logout',
-                  btnFunc: ()=> AppKeys.navigatorKey.currentState?.context.navigateAndRemoveUntil(newRoute: Routes.loginViewRoute)  ),
+                  btnFunc: () async{
+                    CacheHelper.removeData(key: 'userName');
+                    CacheHelper.removeData(key: 'employeeId');
+                    CacheHelper.removeData(key: 'departmentId');
+                    CacheHelper.removeData(key: 'companyId');
+                   await CacheHelper.storage.deleteAll();
+                    return AppKeys.navigatorKey.currentState?.context.navigateAndRemoveUntil(newRoute: Routes.loginViewRoute);
+                  }  ),
             ) : AppKeys.navigatorKey.currentState?.context.navigateAndRemoveUntil(newRoute: Routes.loginViewRoute);
 
     }

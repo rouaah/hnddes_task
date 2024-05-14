@@ -12,11 +12,11 @@ import 'package:hnndes_task/presentation/router/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await CacheHelper.initStorage();
-  DioHelper.init(token: await CacheHelper.getStringData(key:'userToken') ?? '');
+  DioHelper.init(token: CacheHelper.token ?? '');
   Bloc.observer = AppBlocObserver();
-  // CacheHelper.getIntData(key: 'userId');
+  String? token = await CacheHelper.getStringData(key: 'userToken');
+
   runApp(
       MultiBlocProvider(providers: [
         BlocProvider(create: (_) => AuthCubit()),
@@ -28,6 +28,7 @@ void main() async {
 class App extends StatelessWidget {
   const App({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -35,14 +36,16 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder:(context,_)=> MaterialApp(
-        navigatorKey: AppKeys.navigatorKey,
-        title: 'hnndes task',
-        theme: appThemeData[AppTheme.lightTheme],
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: AppRoutes.onGenerateRoute,
-        initialRoute: CacheHelper.getStringData(key: 'useerToken').toString() != '' ? Routes.leavesViewRoute : Routes.loginViewRoute,
+            navigatorKey: AppKeys.navigatorKey,
+            title: 'hnndes task',
+            theme: appThemeData[AppTheme.lightTheme],
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: AppRoutes.onGenerateRoute,
+            initialRoute:
+            // snapshot.data == '' || snapshot.data == null ? Routes.loginViewRoute : Routes.leavesViewRoute
+            CacheHelper.token == '' || CacheHelper.token == null ? Routes.loginViewRoute : Routes.leavesViewRoute,
 
-      ),
+          )
     );
   }
 }

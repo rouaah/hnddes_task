@@ -11,7 +11,7 @@ class LeaveListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(child: Icon(icon,color: color,size: 30.w),backgroundColor: color.withOpacity(0.2),radius: 30.r,),
+      leading: CircleAvatar(child: Icon(icon,color: color,size: 24.w),backgroundColor: color.withOpacity(0.2),radius: 24.r,),
       title: Text(title,style: AppTextStyles.subtitle1Style),
       subtitle: Text(subtitle ,style: AppTextStyles.label1TextStyle,),
 

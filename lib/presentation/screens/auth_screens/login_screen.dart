@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hnndes_task/core/appkeys/app_keys.dart';
 import 'package:hnndes_task/core/appkeys/auth_keys.dart';
 import 'package:hnndes_task/core/extensions/app_navigator.dart';
+import 'package:hnndes_task/core/helpers/cache_helper.dart';
 import 'package:hnndes_task/logic/auth/auth_cubit.dart';
 import 'package:hnndes_task/logic/auth/auth_cubit.dart';
 import 'package:hnndes_task/logic/auth/auth_state.dart';
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is AuthenticatedState) {
             context.getBack();
             context.navigateAndRemoveUntil(
-                newRoute: Routes.leavesViewRoute,arguments: state.user );
+                newRoute: Routes.leavesViewRoute,arguments:await CacheHelper.getStringData(key: 'userName') );
             // context.read<LeaveListBloc>().add(GetLeaveListEvent(firstPage: 1));
             // Future.wait([
             // context.read<LeaveCountCubit>().getLeaveCount(employeeId: '6'),

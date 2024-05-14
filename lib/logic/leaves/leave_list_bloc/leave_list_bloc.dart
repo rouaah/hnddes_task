@@ -19,16 +19,17 @@ class LeaveListBloc extends Bloc<LeaveListEvent, LeaveListState> {
   Future<void> onGetLeaveList(GetLeaveListEvent event, Emitter<LeaveListState> emit) async {
     if (state.hasReachedMax) return;
     if (event.firstPage == 1) {
-      // if (state.status == ProductStatus.loading) {
+      // if (state.status == LeavesStatus.loading) {
+
       emit(state.copyWith(leaveList: List.of(state.leaveList)
         ..clear(),status: LeavesStatus.loading,));
       currentPage = 1;
 
       await leavesRepository.getLeaveList(
-          companyId: await CacheHelper.getStringData(key: 'companyId') ?? '',
-        departmentId:await CacheHelper.getStringData(key: 'departmentId') ?? '',
-        employeeId:await CacheHelper.getStringData(key: 'employeeId') ??'',
-        pageNumber: currentPage.toString()
+          companyId:  CacheHelper.getIntData(key: 'companyId') ?? 0,
+          departmentId: CacheHelper.getIntData(key: 'departmentId') ?? 0,
+          employeeId: CacheHelper.getIntData(key: 'employeeId') ?? 0,
+          pageNumber: currentPage
          ).then((value) => value.fold((l){
         emit(state.copyWith(
             status: LeavesStatus.error,
@@ -36,6 +37,11 @@ class LeaveListBloc extends Bloc<LeaveListEvent, LeaveListState> {
       }, (r) {
         r.isEmpty
             ? emit(state.copyWith(hasReachedMax: true,status: LeavesStatus.success))
+            :r.length < 7 ?
+             emit(state.copyWith(
+            status: LeavesStatus.success,
+            leaveList: r,
+            hasReachedMax: true))
             : emit(state.copyWith(
             status: LeavesStatus.success,
             leaveList: r,
@@ -44,10 +50,10 @@ class LeaveListBloc extends Bloc<LeaveListEvent, LeaveListState> {
     } else {
       currentPage ++ ;
       await leavesRepository.getLeaveList(
-          companyId: await CacheHelper.getStringData(key: 'companyId') ?? '',
-          departmentId:await CacheHelper.getStringData(key: 'departmentId') ?? '',
-          employeeId:await CacheHelper.getStringData(key: 'employeeId') ??'',
-          pageNumber: currentPage.toString()
+          companyId:  CacheHelper.getIntData(key: 'companyId') ?? 0,
+          departmentId: CacheHelper.getIntData(key: 'departmentId') ?? 0,
+          employeeId: CacheHelper.getIntData(key: 'employeeId') ?? 0,
+          pageNumber: currentPage
       ).then((value) => value.fold((l){
         emit(state.copyWith(
             status: LeavesStatus.error,
@@ -65,3 +71,24 @@ class LeaveListBloc extends Bloc<LeaveListEvent, LeaveListState> {
   }
 
 }
+
+
+
+          // if (state.status == PostStatus.loading) {
+          //   final posts = await PostsApi.getPosts();
+          //   return posts.isEmpty
+          //       ? emit(state.copyWith(
+          //       status: PostStatus.success, hasReachedMax: true))
+          //       : emit(state.copyWith(
+          //       status: PostStatus.success,
+          //       posts: posts,
+          //       hasReachedMax: false));
+          // } else {
+          //   final posts = await PostsApi.getPosts(state.posts.length);
+          //   posts.isEmpty
+          //       ? emit(state.copyWith(hasReachedMax: true))
+          //       : emit(state.copyWith(
+          //       status: PostStatus.success,
+          //       posts: List.of(state.posts)..addAll(posts),
+          //       hasReachedMax: false));
+          // }

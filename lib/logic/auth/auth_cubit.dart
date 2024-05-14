@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hnndes_task/core/helpers/cache_helper.dart';
 import 'package:hnndes_task/data/api/dio_helper.dart';
+import 'package:hnndes_task/data/models/user_model.dart';
 import 'package:hnndes_task/logic/auth/auth_state.dart';
 
 
@@ -19,7 +20,6 @@ class AuthCubit extends Cubit<AuthState> {
 
   AuthRepository authRepository = AuthRepository();
 
-  TextEditingController phoneController = TextEditingController();
 
   Future<void> loginUser({
     required String userName,required String password
@@ -29,16 +29,21 @@ class AuthCubit extends Cubit<AuthState> {
         ///put in sp
         value.fold((l) {
           print(l.errorMessage);
+          CacheHelper.storage.deleteAll();
           CacheHelper.saveData(key: 'userToken', value: '');
-          CacheHelper.saveData(key: 'userId', value: '0');
+          CacheHelper.removeData(key: 'employeeId',);
+          CacheHelper.removeData(key: 'companyId', );
+          CacheHelper.removeData(key: 'departmentId', );
+          CacheHelper.removeData(key: 'userName', );
+
           emit(AuthErrorState(errorMsg: l.errorMessage ?? ''));
         },
                 (r) {
-                  CacheHelper.saveData(key: 'userToken', value: r.token);
+                  CacheHelper.saveSecureData(key: 'userToken', value: r.token);
                   // CacheHelper.saveData(key: 'userId', value: r.userData.id);
-                  CacheHelper.saveData(key: 'employeeId', value: r.userData.employee.employeeId.toString());
-                  CacheHelper.saveData(key: 'companyId', value: r.userData.employee.company.companyId.toString());
-                  CacheHelper.saveData(key: 'departmentId', value: r.userData.employee.department.departmentId.toString());
+                  CacheHelper.saveData(key: 'employeeId', value: r.userData.employee.employeeId);
+                  CacheHelper.saveData(key: 'companyId', value: r.userData.employee.company.companyId);
+                  CacheHelper.saveData(key: 'departmentId', value: r.userData.employee.department.departmentId);
                   CacheHelper.saveData(key: 'userName', value: r.userData.employee.fullName.toString());
 
                   DioHelper.init(token: r.token);

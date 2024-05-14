@@ -15,7 +15,7 @@ class LeavesRepository {
   final NetworkConnecionInfo networkConnectionInfo = NetworkConnecionInfo();
 
   Future<Either<Failure, LeaveCount>> getEmployeeLeavesCount({
-    required String employeeId,
+    required int employeeId,
   }) async {
     if (await networkConnectionInfo.isConnected) {
       try {
@@ -54,10 +54,10 @@ class LeavesRepository {
 
   Future<Either<Failure, List<Leave>>> getLeaveList(
   {
-    required String companyId,
-  required String departmentId,
-  required String employeeId,
-  required String pageNumber,
+    required int companyId,
+  required int departmentId,
+  required int employeeId,
+  required int pageNumber,
    String? pageSize
 }) async {
     if (await networkConnectionInfo.isConnected) {
@@ -67,7 +67,7 @@ class LeavesRepository {
           "departmentId": departmentId,
           "employeeId": employeeId,
           "pageNumber": pageNumber,
-          "pageSize": 10
+          "pageSize": 7
         };
         final response = await DioHelper.dio!.get(
           EndPoints.leaveList ,

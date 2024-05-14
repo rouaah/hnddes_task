@@ -13,15 +13,14 @@ class AppRoutes {
 
   static Route<dynamic>? onGenerateRoute(RouteSettings routeSettings) {
     // FlutterNativeSplash.remove();
+
     switch (routeSettings.name) {
+
       // case Routes.initialRoute:
+      //   final args = routeSettings.arguments as String? ;
       //   return MaterialPageRoute(builder: (context) =>
-      //     CacheHelper.getStringData(key: 'userToken').toString() != ''? LeavesScreen() :  LoginScreen()
-      //   );
-      //
-      // case Routes.onBoardingViewRoute:
-      //   return MaterialPageRoute(builder: (context) =>
-      //       LoginScreen()
+      //   token != ''? LeavesScreen(userName: args),
+      //   ) :  LoginScreen()
       //   );
 
       case Routes.loginViewRoute:
@@ -30,19 +29,18 @@ class AppRoutes {
         );
 
       case Routes.leavesViewRoute:
-        // final args = routeSettings.arguments as UserModel ;
         return MaterialPageRoute(builder: (context) =>
             MultiBlocProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => LeaveCountCubit()..getLeaveCount(employeeId: '6')
+                  create: (context) => LeaveCountCubit()..getLeaveCount()
     // args.employee.employeeId.toString()),
                 ),
                 BlocProvider(
                   create: (context) => LeaveListBloc()..add(GetLeaveListEvent(firstPage: 1)),
                 ),
               ],
-              child: LeavesScreen(),
+              child: LeavesScreen( ),
             )
         );
 
