@@ -7,7 +7,7 @@ this project has been developed using [flutter ,dart]
 ## Getting Started
 Clone this project and open with Android studio
 
-git clone https://github.com/rouaah/hnndes_task.git
+git clone https://github.com/rouaah/hnddes_task.git
 
 run flutter pub get in order to install project's used packages
  
